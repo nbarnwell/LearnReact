@@ -6,15 +6,18 @@ class TodoItem extends React.Component {
             listStyleType: "none"
         };
 
-        if (this.props.item.done) {
+        if (this.props.item.complete) {
             style.textDecoration = 'line-through';
         }
 
         return (
             <li style={style}>
-                <input type="checkbox" defaultChecked={this.props.item.done} onChange={() => this.props.onComplete(this.props.item.id)}></input>
+                <input 
+                    type="checkbox" 
+                    checked={this.props.item.complete} 
+                    onChange={() => this.props.onComplete(this.props.item.id)} />
                 <span>{this.props.item.description}</span>
-                {this.props.item.hasOwnProperty('detail') && <p>{this.props.item.detail}</p>}
+                {this.props.item.hasOwnProperty('detail') && this.props.item.detail != null && <p>{this.props.item.detail}</p>}
             </li>
         );
     }

@@ -5,28 +5,23 @@ class Todo extends React.Component {
     constructor() {
         super();
         let todoItems = [
-            { id: 1, done: true, description: 'Decide to learn React'},
-            { id: 2, done: false, description: 'Learn React'},
-            { id: 3, done: false, description: 'Learn React routing'},
-            { id: 4, done: false, description: 'Implement in something real', detail: 'Consider using in System Explorer and/or Advent of puzzles'}
+            { id: 1, complete: true, description: 'Decide to learn React'},
+            { id: 2, complete: false, description: 'Learn React'},
+            { id: 3, complete: false, description: 'Learn React routing'},
+            { id: 4, complete: false, description: 'Implement in something real', detail: 'Consider using in System Explorer and/or Advent of puzzles'}
         ];
 
-        this.state = { items: todoItems };
+        this.state = { todos: todoItems };
         this.handleOnComplete = this.handleOnComplete.bind(this);
     }
 
     handleOnComplete(id) {
-        this.setState(prev => {
-            return {
-                items: prev.items.map(x => {
-                    let done = x.id === id ? !x.done : x.done;
-                    let result = { id: x.id, done: done, description: x.description };
-                    if (x.hasOwnProperty('detail')) {
-                        result.detail = x.detail;
-                    }
-                    return result;
-                })
-            }
+        this.setState(prevState => {
+            let updatedItems = prevState.todos.map(todo => {
+                let complete = todo.id === id ? !todo.complete : todo.complete;
+                return { id: todo.id, complete: complete, description: todo.description, detail: todo.detail };
+            });
+            return { todos: updatedItems };
         });
     }
 
@@ -35,7 +30,7 @@ class Todo extends React.Component {
             <div>
                 <p>Todo list:</p>
                 <ul>
-                    {this.state.items.map(x => {
+                    {this.state.todos.map(x => {
                         return (<TodoItem key={x.id} item={x} onComplete={this.handleOnComplete} />);
                     })}
                 </ul>
