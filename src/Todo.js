@@ -18,8 +18,11 @@ class Todo extends React.Component {
     handleOnComplete(id) {
         this.setState(prevState => {
             let updatedItems = prevState.todos.map(todo => {
-                let complete = todo.id === id ? !todo.complete : todo.complete;
-                return { id: todo.id, complete: complete, description: todo.description, detail: todo.detail };
+                if (todo.id === id) {
+                    todo.complete = !todo.complete;
+                    todo.description += " (Complete)";
+                }
+                return todo;
             });
             return { todos: updatedItems };
         });
