@@ -3,6 +3,7 @@ import './App.css';
 
 import Header from './Header'
 import Todo from './Todo'
+import StarWarsCharacterDetail from './StarWarsCharacterDetail';
 import Footer from './Footer'
 
 class App extends React.Component {
@@ -10,7 +11,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
-        <Todo />
+        <StarWarsCharacterDetail id="1" />
         <Footer />
       </div>
     );
